@@ -1,18 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import classes from './App.css';
+import Items from './Components/Items/Items'
+import Input from './Components/Input/Input'
 
 class App extends Component {
-  render() {
+  state = {
+    items : [],
+    currItem : ""
+  }
+  
+  inputItemHandler(event){
+    // let updatedState = {...this.state}
+    // updatedState.currItem = newItem
+    this.setState({
+      currItem : event.target.value
+    })
+    console.log(this.state)
+  }
+  submitHandler =() =>{
+      let updatedState = {...this.state}
+      updatedState.items = updatedState.items.concat(updatedState.currItem)
+      // console.log(updatedState.items,this.state.items)
+      this.setState({
+        items : updatedState.items,
+        currItem : ""
+  })
+console.log(this.state)
+}
+  render(){
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className={classes.App}>
+        <Items />
+        <Input value = {event => this.inputItemHandler(event)} onItemAdded= {this.submitHandler} />
       </div>
     );
   }
