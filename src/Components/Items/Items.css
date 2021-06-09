@@ -1,4 +1,72 @@
-.Title {
-  text-align: center;
-  color: red;
+.Content {
+  margin-top: 10%;
+}
+
+.List {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  list-style-type: none;
+}
+.Input {
+  width: 50%;
+  color: rgb(38, 50, 56);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1px;
+  background: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+  border: 2px solid rgba(0, 0, 0, 0.02);
+  margin-bottom: 50px;
+  margin-bottom: 27px;
+  font-family: "Ubuntu", sans-serif;
+}
+.Button {
+  cursor: pointer;
+  border-radius: 10px;
+  color: #2c2c54;
+  background: #f7f1e3;
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: "Ubuntu", sans-serif;
+  /* margin-left: 35%; */
+  font-size: 20px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.Items {
+  padding-top: 20px;
+  color: white;
+  font-family: "Nunito", sans-serif;
+  font-weight: bold;
+  font-size: 23px;
+}
+.Delete {
+  cursor: pointer;
+  border-radius: 6px;
+  color: #2c2c54;
+  background: #ea2027;
+  border: 0;
+  margin-top: 30px;
+  margin-left: 5px;
+  font-family: "Ubuntu", sans-serif;
+  /* margin-left: 35%; */
+  font-size: 14px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 600px) {
+  .Content {
+    margin-top: 25%;
+  }
+  .Input {
+    width: 80%;
+  }
 }

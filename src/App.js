@@ -1,41 +1,41 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
+import {Route,Link, Redirect} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-import classes from './App.css';
 import Items from './Components/Items/Items'
-import Input from './Components/Input/Input'
+import classes from './App.css';
+import Auth from './Auth/Auth'
+import Logout from './Auth/Logout'
+import * as actions from './Store/actions'
 
-class App extends Component {
-  state = {
-    items : [],
-    currItem : ""
-  }
-  
-  inputItemHandler(event){
-    // let updatedState = {...this.state}
-    // updatedState.currItem = newItem
-    this.setState({
-      currItem : event.target.value
-    })
-    console.log(this.state)
-  }
-  submitHandler =() =>{
-      let updatedState = {...this.state}
-      updatedState.items = updatedState.items.concat(updatedState.currItem)
-      // console.log(updatedState.items,this.state.items)
-      this.setState({
-        items : updatedState.items,
-        currItem : ""
-  })
-console.log(this.state)
-}
-  render(){
-    return (
-      <div className={classes.App}>
-        <Items />
-        <Input value = {event => this.inputItemHandler(event)} onItemAdded= {this.submitHandler} />
-      </div>
-    );
-  }
+const app =(props) => {
+
+  useEffect(() =>{
+    props.onTryAutoSignIn();
+  },[])
+  return (
+    <div className = {classes.App}>
+      {props.isAuthenticated ? 
+      <Link to = "/logout"><button className ={classes.LogoutButton}>Logout<span role = "img" aria-label= "techie">🚪</span></button></Link>:
+      <Link to = "/auth"><button className= {classes.AuthButton}>Authentication <span role = "img" aria-label= "techie">👨‍💻</span></button></Link>}
+      
+      <Route path = "/auth" exact component ={Auth} />
+      {props.isAuthenticated ? <Route path = "/bucketList" exact component ={Items} /> : null}
+      <Route path = "/logout" exact component = {Logout} />
+      {props.isAuthenticated ? <Redirect to = '/bucketList'/> : null}
+    </div>
+  )
 }
 
-export default App;
+const mapStateToProps = state =>{
+  return{
+    isAuthenticated : state.token !== null
+  }
+}
+const mapDispatchToProps = dispatch =>{
+  return{
+    onTryAutoSignIn : () => dispatch(actions.checkAuthState())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(app);
